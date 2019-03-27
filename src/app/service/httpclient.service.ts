@@ -24,31 +24,27 @@ export class HttpClientService {
 
      getEmployees()
   {
-    let basicString=this.getHeaders();
-
-    let headers=new HttpHeaders(
-      {Authorization:basicString}
-    );
-    console.log("test call");
-    return this.httpClient.get<Employee[]>('http://localhost:8080/employees',{headers});
+    let username='javainuse'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    
+       return this.httpClient.get<Employee[]>('http://localhost:8080/employees',{headers});
   }
 
   public deleteEmployee(employee) {
-    return this.httpClient.delete<Employee>("http://localhost:8080/employees" + "/"+ employee.empId);
+    let username='javainuse'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.httpClient.delete<Employee>("http://localhost:8080/employees" + "/"+ employee.empId,{headers});
   }
 
   public createEmployee(employee) {
-    return this.httpClient.post<Employee>("http://localhost:8080/employees", employee);
+    let username='javainuse'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.httpClient.post<Employee>("http://localhost:8080/employees", employee,{headers});
   }
-
-
-
-getHeaders(){
-  let username='admin'
-  let password='password'
-
-  let  basicString='Basic '+window.btoa(username + ':' + password)
-  return basicString;
-}
-
 }
